@@ -32,10 +32,31 @@ export const joinTrip=async (req, res)=>  {
         const trip=new Trip({
             group_id, admin_id, place_id, start_date, end_date, cost
         })
-        const savedTrip=await trip.save()        
-        return res.status(200).json({ trip: savedTrip, message: 'Successfully joint the trip' })
+        const updatedTrip=await Trip.findByIdAndUpdate(_id, {
+            $addToSet:  {
+                attendee_ids: profile_id
+            }
+        })       
+        return res.status(200).json({ trip: updatedTrip, message: 'Successfully joint the trip' })
     }   catch(err)  {
         return res.status(500).json({ message: 'Failed to join the trip' })
     }
 }
 
+export const leaveTrip=async (req, res)=>    {
+    try {
+        const { _id, profile_id }=req.body
+
+        const updatedTrip=await Trip.findByIdAndUpdate(_id, 
+            {
+                $pull:  {
+                    attendee_ids: profile_id
+                }
+            }
+        )   
+        
+        return res.status(200).json({ trip: updatedTrip, message: 'Successfully left the trip' })
+    }   catch(err)  {
+        return res.status(500).json({ message: 'Failed to leave the trip' })
+    }
+}
