@@ -1,5 +1,6 @@
 import md5 from 'md5'
 import Profile from '../models/Profile.js'
+import { uploadSinglePhoto } from './upload.js'
 
 export const register = async (req, res)=>    {
     try {
@@ -7,7 +8,8 @@ export const register = async (req, res)=>    {
         if(result)  {
             return res.status(409).json({ message: 'Username is already registered' })
         }   else    {
-            const { name, username, password, mobile_no, photo_url }=req.body
+            const photo_url=await uploadSinglePhoto(req, 'profile')
+            const { name, username, password, mobile_no }=req.body
             const profile=new Profile({
                 name, username, password: md5(password), mobile_no, photo_url 
             })

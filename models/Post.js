@@ -8,7 +8,7 @@ const PostSchema=({
     caption:    {
         type: String,
     },
-    photo_url:  {
+    photo_urls:  {
         type: String,
         required: true
     },

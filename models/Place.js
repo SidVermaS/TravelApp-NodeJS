@@ -17,12 +17,13 @@ const PlaceSchema=mongoose.Schema({
         type: Number,
         required: true
     },
-    photos: {
+    photo_urls: {
         type: Array,
         required: false
     },
     no_of_trips:    {
         type: Number,
+        default: 0,
         required: true
     }
 })

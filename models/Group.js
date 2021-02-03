@@ -9,13 +9,18 @@ const GroupSchema=({
         type: String,
         required: true,
     },
+    photo_url:  {
+        type: String,
+    },
     admin_ids: {
         type: Array,
-        required: true,        
+        required: true,  
+        unique: true      
     },
     member_ids: {
         type: Array,
-        required: true
+        required: true,
+        unique: true,
     }
 })
 

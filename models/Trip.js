@@ -23,6 +23,19 @@ const TripSchema=({
         type: Date,
         required: true
     },
+    status: {
+        type: String,
+        required: true
+    },
+    attendee_ids:   {
+        type: Array,
+        required: true,
+        default: []
+    },
+    cost:   {
+        type: Number,
+        required: true,
+    }
 })
 
 export default mongoose.model('trips', TripSchema)
