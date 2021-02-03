@@ -12,7 +12,11 @@ export const register = async (req, res)=>    {
                 name, username, password: md5(password), mobile_no, photo_url 
             })
             const result1=await profile.save()
-            return res.status(201).json({ message: 'Successfully registered' })
+            if(result1) {
+                return res.status(201).json({ message: 'Successfully registered' })
+            }   else    {
+                return res.status(400).json({ message: 'Failed to register' })
+            }            
         }
     }   catch(err)  {
         return res.status(500).json({ message: 'Failed to register' })
@@ -25,9 +29,11 @@ export const login=async (req, res)=>   {
             username: req.body.username
         })
         if(result)  {
-
-        }   else    {
+            const { username, password }=req.body
+            password=md5(password)
             
+        }   else    {
+            return res.status(400).json({ message: 'Username is not registered' })
         }
     }   catch(err)  {
         return res.status(500).json({ message: 'Failed to login' })
