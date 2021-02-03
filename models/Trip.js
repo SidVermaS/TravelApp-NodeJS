@@ -24,12 +24,21 @@ const TripSchema=({
         required: true
     },
     status: {
-        type: String,
+        type: Number,
+        required: true,
+        default: 0
+    },
+    admin_id:   {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     attendee_ids:   {
-        type: Array,
-        required: true,
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'profiles'
+            }
+        ],
         default: []
     },
     cost:   {

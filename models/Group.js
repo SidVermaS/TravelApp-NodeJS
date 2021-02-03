@@ -13,14 +13,22 @@ const GroupSchema=({
         type: String,
     },
     admin_ids: {
-        type: Array,
-        required: true,  
-        unique: true      
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'profiles'
+            }
+        ],
+        default: [],     
     },
     member_ids: {
-        type: Array,
-        required: true,
-        unique: true,
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'profiles'
+            }
+        ],
+        default: []
     }
 })
 

@@ -25,6 +25,11 @@ const ProfileSchema=mongoose.Schema({
         type: Number,
         required: true,
         unique: true
+    },
+    balance:    {
+        type: Number,
+        required: true,
+        default: 0
     }
 })
 
